@@ -23,6 +23,13 @@ jobs:
         with:
           path: "src"
 
+      - name: Ensure builds branch exists
+        run: |
+          git fetch origin builds || git checkout --orphan builds
+          git reset --hard
+          git commit --allow-empty -m "Initialize builds branch"
+          git push origin builds
+
       - name: Checkout builds
         uses: actions/checkout@master
         with:
